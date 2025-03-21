@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+
+html {
+  position: relative;
+  overflow-x: hidden !important;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.background {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+.item-bg {
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
+}
+
+.news-slider {
+  position: relative;
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+.news-slider__wrp {
+  display: flex;
+  overflow: hidden;
+}
+
+.news-slider__item {
+  position: relative;
+  flex: 0 0 100%;
+}
+
+.news__item {
+  display: block;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.news-date {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff4500;
+}
+
+.news-date__title {
+  font-size: 30px;
+  display: block;
+}
+
+.news__title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.news__txt {
+  font-size: 14px;
+  color: #666;
+  margin: 10px 0;
+}
+
+.news__img img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.news-slider__ctr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.news-slider__arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.news-slider__arrow {
+  background: #ff4500;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.news-slider__arrow:hover {
+  background: #cc3700;
+}
