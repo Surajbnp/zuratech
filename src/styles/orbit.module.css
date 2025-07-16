@@ -1,0 +1,126 @@
+.orbitWrapper {
+  position: relative;
+  width: 500px;
+  height: 60vh;
+  margin: 0 auto;
+}
+
+/* Common orbit styling */
+.orbitCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #78a3fa;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Inner orbit */
+.orbit1 {
+  width: 300px;
+  height: 300px;
+  animation: spinClockwise 20s linear infinite;
+}
+
+/* Outer orbit */
+.orbit2 {
+  width: 450px;
+  height: 450px;
+  animation: spinAntiClockwise 30s linear infinite;
+}
+
+.orbit3 {
+  width: 180px;
+  height: 180px;
+  animation: spinAntiClockwise 10s linear infinite;
+}
+/* Icons positioned around the circle */
+.orbitIcon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #5e90f1;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 8px;
+}
+
+/* Inner orbit icon positions */
+.orbit1Icon1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(105%);
+}
+/* .orbit1Icon2 {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+.orbit1Icon3 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+} */
+
+/* Outer orbit icon positions */
+.orbit2Icon1 {
+  top: 0;
+  left: 30%;
+  transform: translateX(-85%);
+}
+.orbit2Icon2 {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+}
+.orbit2Icon3 {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.orbit2Icon4 {
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%);
+}
+
+.core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background-color: #5e90f1;
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(94, 144, 241, 0.6);
+}
+
+/* Clockwise rotation */
+@keyframes spinClockwise {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Anti-clockwise rotation */
+@keyframes spinAntiClockwise {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}

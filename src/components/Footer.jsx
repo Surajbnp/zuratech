@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 const SocialButton = ({ children, label, href }) => {
   return (
@@ -25,6 +26,7 @@ const SocialButton = ({ children, label, href }) => {
       h={8}
       cursor={"pointer"}
       as={"a"}
+      target="_blank"
       href={href}
       display={"inline-flex"}
       alignItems={"center"}
@@ -49,14 +51,14 @@ const ListHeader = ({ children }) => {
 };
 
 export default function Footer() {
+  const navigate = useNavigate();
+
   return (
     <Box
       width={"100%"}
-      minH={"40vh"}
       overflow={"hidden"}
       bg={useColorModeValue("gray.50", "gray.900")}
       color={useColorModeValue("gray.700", "gray.200")}
-      pos={"relative"}
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
@@ -71,53 +73,89 @@ export default function Footer() {
               © 2025 Zuratech. All rights reserved
             </Text>
             <Stack direction={"row"} spacing={6}>
-              <SocialButton label={"Twitter"} href={"#"}>
+              <SocialButton label={"Twitter"} href={"https://x.com/Zuraverse"}>
                 <FaTwitter />
               </SocialButton>
-              <SocialButton label={"YouTube"} href={"#"}>
+              <SocialButton
+                label={"YouTube"}
+                href={"https://www.youtube.com/@zuratechnologies7172"}
+              >
                 <FaYoutube />
               </SocialButton>
-              <SocialButton label={"Instagram"} href={"#"}>
+              <SocialButton
+                label={"Instagram"}
+                href={
+                  "https://www.instagram.com/zura.tech?igsh=ZDd6aXVha2RzOXV0"
+                }
+              >
                 <FaInstagram />
               </SocialButton>
             </Stack>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               About us
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Blog
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Contact us
             </Box>
-            <Box as="a" href={"#"}>
-              Pricing
-            </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Testimonials
             </Box>
           </Stack>
+
           <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Help Center
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Terms of Service
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="a"
+              href={"#"}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Legal
             </Box>
-            <Box as="a" href={"#"}>
+            <Box
+              as="button"
+              onClick={() => navigate("/privacy-policy")}
+              _hover={{ color: "#4A6CF7", textDecoration: "underline" }}
+            >
               Privacy Policy
             </Box>
-            <Box as="a" href={"#"}>
-              Satus
-            </Box>
           </Stack>
+
           <Stack align={"flex-start"}>
             <ListHeader>Stay up to date</ListHeader>
             <Stack direction={"row"}>
@@ -130,10 +168,11 @@ export default function Footer() {
                 }}
               />
               <IconButton
-                bg={"#a39cf4"}
-                color={useColorModeValue("white", "gray.800")}
+                bg={"#4A6CF7"}
+                color={useColorModeValue("white")}
                 _hover={{
                   bg: "#e5d1fa",
+                  color: "black",
                 }}
                 aria-label="Subscribe"
                 icon={<BiMailSend />}
@@ -142,20 +181,6 @@ export default function Footer() {
           </Stack>
         </SimpleGrid>
       </Container>
-      <Text
-        textAlign={"center"}
-        pos={"absolute"}
-        bottom={"-100px"}
-        w={"100%"}
-        fontSize={["50px", "50px", "150px", "200px"]}
-        letterSpacing={"40px"}
-        color={"transparent"}
-        sx={{
-          WebkitTextStroke: "2px #e5d1fa",
-        }}
-      >
-        ZURATECH
-      </Text>
     </Box>
   );
 }

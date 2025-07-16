@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 
 .App {
   text-align: center;
@@ -6,4 +8,8 @@
 
 * {
   font-family: "Quicksand", sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

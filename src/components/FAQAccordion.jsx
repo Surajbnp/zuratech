@@ -11,7 +11,7 @@ import {
 const FAQAccordion = ({ faqs }) => {
   return (
     <Box mt={8} textAlign={"start"}>
-      <Text fontSize={"4xl"} fontWeight={600} color={"#a39cf4"}>
+      <Text fontSize={"22px"} fontWeight={600}>
         Frequently Asked Questions
       </Text>
       <Box mt={4}>
@@ -19,13 +19,14 @@ const FAQAccordion = ({ faqs }) => {
           {faqs.map((faq, index) => (
             <AccordionItem
               key={index}
-              border={"2px solid #a39cf4"}
-              borderRadius="md"
+              border={"1px solid #4A6CF7"}
+              borderRadius="none"
               mb={4}
+              p={4}
             >
               <h2>
                 <AccordionButton
-                  _expanded={{ bg: "#e5d1fa", color: "gray.800" }}
+                  _expanded={{ bg: "#4A6CF7", color: "white" }}
                 >
                   <Box flex="1" textAlign="left" fontWeight="600">
                     {faq.question}
@@ -33,7 +34,7 @@ const FAQAccordion = ({ faqs }) => {
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
-              <AccordionPanel pb={4} color="gray.800">
+              <AccordionPanel pb={4} >
                 {faq.answer}
               </AccordionPanel>
             </AccordionItem>
@@ -45,3 +46,4 @@ const FAQAccordion = ({ faqs }) => {
 };
 
 export default FAQAccordion;
+

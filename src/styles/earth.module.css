@@ -1,0 +1,95 @@
+.planetContainer {
+  border-radius: 50%;
+  box-shadow: 5px -3px 10px 3px #5e90f1;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  width: 500px;
+  z-index: 1;
+  margin: auto;
+}
+
+.night {
+  animation: rotate-night 80s linear infinite;
+  background-image: url(https://res.cloudinary.com/dddnxiqpq/image/upload/v1744438487/2k_earth_nightmap_zqow4x.jpg);
+  background-size: 200%;
+  height: 700px;
+  position: absolute;
+  width: 700px;
+  z-index: 0;
+}
+
+.day {
+  animation: rotate-day 80s linear infinite;
+  background-image: url(https://res.cloudinary.com/dddnxiqpq/image/upload/v1744438536/2k_earth_daymap_r5flla.jpg);
+  background-size: 200%;
+  border-radius: 50%;
+  box-shadow: 5px 0 20px 10px #040615 inset;
+  height: 700px;
+  margin-left: 50px;
+  position: absolute;
+  width: 700px;
+  z-index: 1;
+  border: none;
+}
+
+.clouds {
+  animation: rotate-day 50s linear infinite, spin-clouds 100s ease infinite;
+  background-image: url(https://res.cloudinary.com/dddnxiqpq/image/upload/v1744438566/2k_earth_clouds_hjxddn.jpg);
+  background-size: 200%;
+  border-radius: 50%;
+  box-shadow: 5px 0 20px 10px #040615 inset, -9px 0px 20px 10px #5e90f1 inset;
+  height: 700px;
+  margin-left: -50px;
+  opacity: 0.45;
+  position: absolute;
+  width: 700px;
+  z-index: 3;
+}
+
+.innerShadow {
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: -5px 0 10px 1px #152b57 inset, 5px 0 10px 1px #040615 inset;
+  height: 700px;
+  position: absolute;
+  width: 700px;
+  z-index: -5;
+}
+
+@keyframes rotate-day {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -80% 0;
+  }
+}
+
+@keyframes rotate-night {
+  0% {
+    background-position: calc(120% + 120px) 0;
+  }
+  100% {
+    background-position: calc(-80% + 120px) 0;
+  }
+}
+
+@keyframes spin-clouds {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .planetContainer {
+    width: 300px;
+    height: 300px;
+  }
+}

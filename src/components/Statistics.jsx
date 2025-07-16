@@ -15,8 +15,7 @@ function StatsCard(props) {
     <Stat
       px={{ base: 2, md: 4 }}
       py={"5"}
-      shadow={"xl"}
-      border={"2px solid #a39cf4"}
+      border={"1px solid #4A6CF7"}
       rounded={"lg"}
     >
       <Flex justifyContent={"space-between"}>
@@ -42,17 +41,17 @@ function StatsCard(props) {
 
 export default function Statistics({ textAlign, color }) {
   return (
-    <Box maxW="7xl" mx={"auto"}>
+    <Box maxW="1300px" mx={"auto"}>
       <chakra.h1
         textAlign={textAlign}
-        fontSize={"4xl"}
-        py={8}
-        fontWeight={"600"}
+        fontSize={{ base: "26px", md: "36px" }}
+        fontWeight={600}
         color={color}
       >
         Why Choose Us ?
       </chakra.h1>
       <SimpleGrid
+        mt={8}
         columns={{ base: 1 }}
         spacing={{ base: 5, lg: 8 }}
         minChildWidth="250px"
@@ -64,9 +63,9 @@ export default function Statistics({ textAlign, color }) {
           icon={
             <lord-icon
               src="https://cdn.lordicon.com/urhdeyyj.json"
-              trigger="loop"
-              colors="primary:#a39cf4,secondary:#e5d1fa"
-              style={{ width: "70px", height: "70px" }}
+              trigger="hover"
+              colors="primary:#4A6CF7,secondary:#4A6CF7"
+              style={{ width: "70px", height: '70px'} }
             ></lord-icon>
           }
         />
@@ -76,8 +75,8 @@ export default function Statistics({ textAlign, color }) {
           icon={
             <lord-icon
               src="https://cdn.lordicon.com/xjkryxnf.json"
-              trigger="loop"
-              colors="primary:#a39cf4,secondary:#4bb3fd"
+              trigger="hover"
+              colors="primary:#4A6CF7,secondary:#4A6CF7"
               style={{ width: "70px", height: "70px" }}
             ></lord-icon>
           }
@@ -88,8 +87,8 @@ export default function Statistics({ textAlign, color }) {
           icon={
             <lord-icon
               src="https://cdn.lordicon.com/uihwbzln.json"
-              trigger="loop"
-              colors="primary:#a39cf4,secondary:#a39cf4"
+              trigger="hover"
+              colors="primary:#4A6CF7,secondary:#4A6CF7"
               style={{ width: "70px", height: "70px" }}
             ></lord-icon>
           }
@@ -100,8 +99,8 @@ export default function Statistics({ textAlign, color }) {
           icon={
             <lord-icon
               src="https://cdn.lordicon.com/wmqqbxlm.json"
-              trigger="loop"
-              colors="primary:#a39cf4,secondary:#a39cf4"
+              trigger="hover"
+              colors="primary:#4A6CF7,secondary:#4A6CF7"
               style={{ width: "70px", height: "70px" }}
             ></lord-icon>
           }

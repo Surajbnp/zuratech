@@ -1,146 +1,248 @@
-"use client";
-
 import {
   Box,
   Flex,
   HStack,
+  Text,
   IconButton,
   Button,
-  useDisclosure,
-  Stack,
   Image,
+  Switch,
+  useDisclosure,
+  useColorMode,
+  Stack,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
-import { FaPhoneVolume } from "react-icons/fa6";
+import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-const Links = [
-  { name: "Home", id: "sec1" },
-  { name: "Services", id: "sec2" },
-  { name: "About Us", id: "sec3" },
-  { name: "Projects", id: "sec4" },
-  { name: "Contact Us", id: "sec5" },
-];
+const Links = ["Home", "Case-Studies", "About", "Experts", "Contact"];
+
+const NavLink = ({ children, onClick }) => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const linkPath = children === "Home" ? "/" : `/${children.toLowerCase()}`;
+
+  const isActive = currentPath === linkPath;
+
+  return (
+    <Text
+      as="a"
+      px={3}
+      py={2}
+      rounded="md"
+      fontWeight={isActive ? 600 : 400}
+      cursor="pointer"
+      color={isActive ? "#4A6CF7" : "inherit"}
+      _hover={{
+        textDecoration: "none",
+        borderRadius: "none",
+        color: "#4A6CF7",
+        fontWeight: 600,
+      }}
+      onClick={onClick}
+    >
+      {children}
+    </Text>
+  );
+};
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [activeSection, setActiveSection] = useState("sec1");
+  const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate();
+  const [studio, setIsStudio] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      let currentSection = "sec1";
-      Links.forEach((link) => {
-        const section = document.getElementById(link.id);
-        if (section) {
-          const sectionTop = section.offsetTop;
-          if (window.scrollY >= sectionTop - 200) {
-            currentSection = link.id;
-          }
-        }
-      });
-
-      setActiveSection(currentSection);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleToggle = () => {
+    setShowOverlay(true);
+    let timer = 3;
+    setCountdown(timer);
+
+    const interval = setInterval(() => {
+      timer -= 1;
+      setCountdown(timer);
+
+      if (timer === 0) {
+        clearInterval(interval);
+        setShowOverlay(false);
+        setIsStudio(true);
+        window.open("/studio", "_blank");
+      }
+    }, 1000);
   };
 
+  // Define background colors based on scroll and color mode
+  const bgColor = isScrolled
+    ? colorMode === "light"
+      ? "gray.100"
+      : "gray.900"
+    : "transparent";
+
+  const location = useLocation();
+  const isHomepage = location.pathname === "/";
+  const isLight = colorMode === "light";
+
+  // textColor logic
+  const textColor = isHomepage
+    ? isScrolled
+      ? isLight
+        ? "black"
+        : "white"
+      : "white"
+    : isLight
+    ? "black"
+    : "white";
+
   return (
-    <>
-      <Box fontSize={"12px"} w={"100%"} padding={{base : "0px 20px", md : "0px 40px"}} bg={"transparent"}>
-        <Flex h={"10vh"} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>
+    <Box
+      bg={bgColor}
+      color={textColor}
+      w="100%"
+      px={4}
+      h="9vh"
+      position="fixed"
+      top="0"
+      zIndex="1000"
+      transition="background-color 0.3s ease"
+    >
+      <Flex
+        maxW="1300px"
+        mx="auto"
+        h="full"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        {/* Logo */}
+        <HStack spacing={6} alignItems="center">
+          <Box onClick={() => navigate("/")}>
             <Image
-              w={"80%"}
+              w="70%"
               src="https://res.cloudinary.com/dddnxiqpq/image/upload/v1741593004/Zura-Tech-Logo-169_1_ogc6la.png"
+              cursor="pointer"
             />
           </Box>
 
-          <HStack
-            bg={"#fafafa"}
-            padding={"10px"}
-            borderRadius={"20px"}
-            as={"nav"}
-            spacing={6}
-            display={{ base: "none", md: "flex" }}
-          >
+          {/* Desktop Nav Links */}
+          <HStack as="nav" spacing={6} display={{ base: "none", md: "flex" }}>
             {Links.map((link) => (
-              <Box
-                as="a"
-                key={link.id}
-                px={2}
-                py={1}
-                rounded={"md"}
-                fontWeight={600}
-                cursor="pointer"
-                _hover={{ textDecoration: "none", color: "#a39cf4" }}
-                color={activeSection === link.id ? "#a39cf4" : "black"}
-                onClick={() => scrollToSection(link.id)}
+              <NavLink
+                key={link}
+                onClick={() =>
+                  navigate(link === "Home" ? `/` : `/${link.toLowerCase()}`)
+                }
               >
-                {link.name}
-              </Box>
+                {link}
+              </NavLink>
             ))}
           </HStack>
-          <Flex gap={4}>
-            <Button
-              leftIcon={<FaPhoneVolume size={"18px"} />}
-              borderRadius={"20px"}
-              fontSize={"12px"}
-              bg={"#a39cf4"}
-            >
-              Contact us
-            </Button>
-            <IconButton
-              bg={"#a39cf4"}
-              size={"md"}
-              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-              aria-label={"Open Menu"}
-              display={{ md: "none" }}
-              onClick={isOpen ? onClose : onOpen}
-            />
-          </Flex>
-        </Flex>
+        </HStack>
 
-        {isOpen ? (
+        {/* Right Side - Toggle & Theme Switch */}
+        <Flex gap={2} alignItems="center">
+          {/* <Flex gap={3} align="center">
+            <Text
+              w={"fit-content"}
+              fontWeight="medium"
+              fontSize={{ base: "8px", md: "16px" }}
+            >
+              {studio ? "Zura Tech" : "Zura Studio"}
+            </Text>
+            <Switch onChange={handleToggle} size="lg" />
+          </Flex> */}
+          <Button onClick={toggleColorMode}>
+            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          </Button>
+          <IconButton
+            size="md"
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label="Open Menu"
+            display={{ base: "block", md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+        </Flex>
+      </Flex>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <Box
-            borderRadius={"8px"}
-            p={4}
+            bg={colorMode === "dark" ? "#1e232e" : "white"}
+            color={colorMode === "dark" ? "white" : "#1e232e"}
+            pb={4}
             display={{ md: "none" }}
-            style={{
-              transform: "translateY(10px)",
-              transition: "opacity 2s ease, transform 0.4s ease",
-              willChange: "opacity, transform",
-            }}
+            boxShadow="lg"
+            width={"100%"}
           >
-            <Stack bg={"#fafafa"} as={"nav"} spacing={4}>
+            <Stack as="nav" spacing={4}>
               {Links.map((link) => (
-                <Box
-                  as="a"
-                  key={link.id}
-                  px={2}
-                  py={1}
-                  rounded={"md"}
-                  fontWeight={600}
-                  cursor="pointer"
-                  _hover={{ textDecoration: "none", color: "#F89700" }}
-                  color={activeSection === link.id ? "#F89700" : "black"}
-                  onClick={() => scrollToSection(link.id)}
+                <NavLink
+                  key={link}
+                  onClick={() => {
+                    navigate(link === "Home" ? `/` : `/${link.toLowerCase()}`);
+                    onClose();
+                  }}
                 >
-                  {link.name}
-                </Box>
+                  {link}
+                </NavLink>
               ))}
             </Stack>
           </Box>
-        ) : null}
-      </Box>
-    </>
+        </motion.div>
+      )}
+
+      {/* Full-screen GIF Overlay */}
+      {/* {showOverlay && (
+        <Box
+          position="fixed"
+          top="0"
+          left="0"
+          w="100vw"
+          h="100vh"
+          bg="black"
+          zIndex="9999"
+        >
+          <Image
+            src="https://res.cloudinary.com/dddnxiqpq/image/upload/v1743402731/tunnel-4084_n35crm.gif"
+            w="100%"
+            h="100%"
+            objectFit="cover"
+          />
+          <Text
+            position="absolute"
+            top="50%"
+            left="50%"
+            transform="translate(-50%, -50%)"
+            color="white"
+            fontSize="2xl"
+            fontWeight="bold"
+            textAlign="center"
+            bg="rgba(0, 0, 0, 0.7)"
+            p={4}
+            borderRadius="md"
+          >
+            Moving to Zura Studio in {countdown}...
+          </Text>
+        </Box>
+      )} */}
+    </Box>
   );
 }
+
+// adding 2 navbar one for homepage another for pages rest

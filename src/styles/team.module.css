@@ -1,0 +1,18 @@
+.ceoSec {
+}
+
+.ceoSec > div {
+  flex: 1;
+  min-height: 70vh;
+}
+
+.ceoImg {
+  background-image: url("https://res.cloudinary.com/dddnxiqpq/image/upload/v1744105425/4a05e51d-6e8b-4595-9275-e0c907b230dd.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.ceoSec > div:nth-child(2) {
+  height: fit-content;
+}
